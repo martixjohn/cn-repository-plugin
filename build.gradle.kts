@@ -46,8 +46,8 @@ gradlePlugin {
             id = "${project.group}.cn-repository-project-plugin"
             implementationClass = "io.github.martixjohn.cnrepository.CnRepositoryProjectPlugin"
             displayName = "A plugin to add China repositories (Project Scope)"
-            description = "Add China repositories in Settings scope, modifying the repositories DSL"
-            tags = listOf("settings-plugin", "china-plugin", "repository")
+            description = "Add China repositories in Project scope, modifying the repositories DSL"
+            tags = listOf("project-plugin", "china-plugin", "repository")
         }
     }
 }
