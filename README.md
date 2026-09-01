@@ -34,7 +34,7 @@ cnRepository {
 public enum CnRepository {
     ALIYUN("https://maven.aliyun.com/repository/public/"),
     TENCENT("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"),
-    NETEASE("https://mirrors.163.com/maven/repository/maven-public/");
+    NETEASE("http://mirrors.163.com/maven/repository/maven-public/");
     // ...
 }
 ```
