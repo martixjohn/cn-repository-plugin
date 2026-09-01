@@ -5,12 +5,21 @@ plugins {
 
 group = "com.github.martixjohn"
 version = "1.0.0"
-description = "Add China repository to your gradle project"
+description = "Add China repositories to your gradle project"
+
+javaToolchains {
+    version = JavaVersion.VERSION_17
+}
+
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 gradlePlugin {
@@ -31,9 +40,7 @@ gradlePlugin {
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+
 
 
 
