@@ -10,14 +10,16 @@
 - `TENCENT`: https://mirrors.cloud.tencent.com/nexus/repository/maven-public/
 - `NETEASE`: http://mirrors.163.com/maven/repository/maven-public/
 
+---
 
-提供两种插件：
+为了更符合实际需求，**有两种插件可供选择**：
 
 1. Settings级别(scope)插件
 
 为项目依赖和插件配置仓库, id为 `io.github.martixjohn.cn-repository-plugin` 
 
 此插件会修改你的settings脚本中`pluginManagement` 和 `dependencyResolutionManagement` DSL
+
 
 2. Project级别(scope)插件
 
