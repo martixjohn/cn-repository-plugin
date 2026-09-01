@@ -3,13 +3,32 @@
 
 为你的Gradle项目自动添加国内仓库
 
-包含两个插件:
+目前支持以下仓库源(repository)
 
-- Settings级别(scope)插件: io.github.martixjohn.cn-repository-plugin
-- Project级别(scope)插件: io.github.martixjohn.cn-repository-project-plugin
+```
+ALIYUN (默认, by default): "https://maven.aliyun.com/repository/public/"
+TENCENT: "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/
+NETEASE: "http://mirrors.163.com/maven/repository/maven-public/"
+```
+
+提供两种插件：
+
+1. Settings级别(scope)插件
+
+为项目依赖和插件配置仓库, id为 `io.github.martixjohn.cn-repository-plugin` 
+
+此插件会修改你的settings脚本中`pluginManagement` 和 `dependencyResolutionManagement` DSL
+
+2. Project级别(scope)插件
+
+仅为依赖配置仓库, id为 `io.github.martixjohn.cn-repository-project-plugin`
+
+此插件会修改你的build脚本中 `repositories` DSL
 
 
 ## 快速上手
+
+### 使用Settings插件
 
 settings.gradle.kts
 ```kotlin
@@ -28,19 +47,9 @@ cnRepository {
 }
 ```
 
-仓库目前支持以下，可联系作者添加
-
-```class
-public enum CnRepository {
-    ALIYUN("https://maven.aliyun.com/repository/public/"),
-    TENCENT("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"),
-    NETEASE("http://mirrors.163.com/maven/repository/maven-public/");
-    // ...
-}
-```
 
 
-另外，也提供了只应用于Project级别的插件，**但不能指定插件依赖的仓库**
+### 使用Project插件
 
 build.gradle.kts
 ```kotlin
