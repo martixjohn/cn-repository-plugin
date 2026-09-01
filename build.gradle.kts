@@ -5,7 +5,7 @@ plugins {
 
 group = "com.github.martixjohn"
 version = "1.0.0"
-description = "Prefer China maven repository to mavenCentral"
+description = "Add China repository to your gradle project"
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
@@ -31,12 +31,6 @@ gradlePlugin {
     }
 }
 
-repositories.forEach {
-    if(it is MavenArtifactRepository) {
-        it.url = uri("$buildDir/repo")
-    }
-}
-
 tasks.test {
     useJUnitPlatform()
 }
@@ -47,10 +41,10 @@ publishing {
     publications {
         create<MavenPublication>("myLibrary") {
             from(components["java"])
+
         }
     }
     repositories {
-        // 发布到本机 ~/.m2/repository
         mavenLocal()
     }
 }
