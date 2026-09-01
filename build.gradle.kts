@@ -1,6 +1,7 @@
 plugins {
     `java-gradle-plugin`
     `maven-publish`
+    id("com.gradle.plugin-publish") version "2.1.1"
 }
 
 group = "io.github.martixjohn"
@@ -28,36 +29,25 @@ tasks.test {
 }
 
 gradlePlugin {
+    website = "https://github.com/martixjohn/cn-repository-plugin"
+    vcsUrl = "https://github.com/martixjohn/cn-repository-plugin.git"
+
     plugins {
         create("settings-plugin") {
             id = "${project.group}.cn-repository-plugin"
             implementationClass = "io.github.martixjohn.cnrepository.CnRepositorySettingsPlugin"
-            displayName = "CN repository plugin at Settings scope"
-            description = project.description
+            displayName = "A plugin to add China repositories (Settings Scope)"
+            description =
+                "Add China repositories at Settings scope, modifying the dependencyResolutionManagement and the pluginManagement DSL"
+            tags = listOf("settings-plugin", "china-plugin", "repository")
         }
 
         create("project-plugin") {
             id = "${project.group}.cn-repository-project-plugin"
             implementationClass = "io.github.martixjohn.cnrepository.CnRepositoryProjectPlugin"
-            displayName = "CN Repository Plugin at Project scope"
-            description = project.description
+            displayName = "A plugin to add China repositories (Project Scope)"
+            description = "Add China repositories at Settings scope, modifying the repositories DSL"
+            tags = listOf("settings-plugin", "china-plugin", "repository")
         }
     }
 }
-
-
-
-
-
-publishing {
-    publications {
-        create<MavenPublication>("myLibrary") {
-            from(components["java"])
-
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}
-
