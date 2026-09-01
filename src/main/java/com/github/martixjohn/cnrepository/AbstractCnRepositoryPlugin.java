@@ -7,12 +7,33 @@ import org.gradle.api.artifacts.dsl.RepositoryHandler;
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository;
 import org.gradle.api.provider.Property;
 
-public class AbstractCnRepositoryPlugin {
 
+/**
+ * Abstract class for plugin
+ */
+public abstract sealed class AbstractCnRepositoryPlugin permits CnRepositoryProjectPlugin, CnRepositorySettingsPlugin {
+
+    /**
+     * for subclass to use
+     */
+    protected AbstractCnRepositoryPlugin() {
+    }
+
+    /**
+     * set convention for repository
+     *
+     * @param property CnRepository
+     */
     protected final void conventionUrl(Property<CnRepository> property) {
         property.convention(CnRepository.ALIYUN);
     }
 
+    /**
+     * add repository to RepositoryHandler
+     *
+     * @param extension              CnRepositoryExtension
+     * @param dependencyRepositories dependencyRepositories
+     */
     protected final void addToRepositories(CnRepositoryExtension extension, RepositoryHandler dependencyRepositories) {
         Action<MavenArtifactRepository> mavenAction = new Action<>() {
             @Override

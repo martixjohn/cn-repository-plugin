@@ -9,7 +9,17 @@ import org.gradle.api.initialization.Settings;
 import org.gradle.api.plugins.ExtensionContainer;
 import org.gradle.api.provider.Property;
 
-public abstract class CnRepositorySettingsPlugin extends AbstractCnRepositoryPlugin implements Plugin<Settings> {
+
+/**
+ * Settings scope plugin
+ */
+public final class CnRepositorySettingsPlugin extends AbstractCnRepositoryPlugin implements Plugin<Settings> {
+    /**
+     * for gradle to initiate
+     */
+    public CnRepositorySettingsPlugin() {
+    }
+
     @Override
     public void apply(Settings settings) {
         ExtensionContainer extensions = settings.getExtensions();
@@ -27,7 +37,7 @@ public abstract class CnRepositorySettingsPlugin extends AbstractCnRepositoryPlu
                 RepositoryHandler dependencyRepositories = settings.getDependencyResolutionManagement().getRepositories();
                 addToRepositories(extension, dependencyRepositories);
 
-                if(extension.getApplyToPlugin().getOrElse(false)) {
+                if (extension.getApplyToPlugin().getOrElse(false)) {
                     RepositoryHandler pluginRepositories = settings.getPluginManagement().getRepositories();
                     addToRepositories(extension, pluginRepositories);
                 }
