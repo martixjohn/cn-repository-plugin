@@ -5,11 +5,11 @@
 
 目前支持以下仓库源(repository)
 
-```
-ALIYUN (默认, by default): "https://maven.aliyun.com/repository/public/"
-TENCENT: "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/
-NETEASE: "http://mirrors.163.com/maven/repository/maven-public/"
-```
+
+- `ALIYUN` (默认, by default): https://maven.aliyun.com/repository/public/
+- `TENCENT`: https://mirrors.cloud.tencent.com/nexus/repository/maven-public/
+- `NETEASE`: http://mirrors.163.com/maven/repository/maven-public/
+
 
 提供两种插件：
 
