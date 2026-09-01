@@ -13,7 +13,7 @@
 
 settings.gradle.kts
 ```kotlin
-import ext.io.github.martixjohn.cnrepository.CnRepository.*
+import io.github.martixjohn.cnrepository.ext.CnRepository.*
 
 plugins {
     id("io.github.martixjohn.cn-repository-plugin") version "1.0.0"
@@ -44,7 +44,7 @@ public enum CnRepository {
 
 build.gradle.kts
 ```kotlin
-import ext.io.github.martixjohn.cnrepository.CnRepository.*
+import io.github.martixjohn.cnrepository.ext.CnRepository.*
 
 plugins {
     id("io.github.martixjohn.cn-repository-project-plugin") version "1.0.0"
