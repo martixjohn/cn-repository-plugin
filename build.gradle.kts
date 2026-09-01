@@ -7,8 +7,11 @@ group = "com.github.martixjohn"
 version = "1.0.0"
 description = "Add China repositories to your gradle project"
 
-javaToolchains {
-    version = JavaVersion.VERSION_17
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 
