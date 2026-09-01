@@ -1,7 +1,7 @@
-package com.github.martixjohn.cnrepository;
+package io.github.martixjohn.cnrepository;
 
-import com.github.martixjohn.cnrepository.ext.CnRepository;
-import com.github.martixjohn.cnrepository.ext.CnRepositorySettingsExtension;
+import io.github.martixjohn.cnrepository.ext.CnRepository;
+import io.github.martixjohn.cnrepository.ext.CnRepositorySettingsExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.artifacts.dsl.RepositoryHandler;
 import org.gradle.api.initialization.Settings;

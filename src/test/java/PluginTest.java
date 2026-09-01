@@ -1,4 +1,4 @@
-import com.github.martixjohn.cnrepository.ext.CnRepository;
+import io.github.martixjohn.cnrepository.ext.CnRepository;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.Test;
@@ -15,9 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PluginTest {
     final String pluginVersion = "1.0.0";
 
+    final String pluginGroup = "io.github.martixjohn";
+    final String packageName = "io.github.martixjohn.cnrepository";
+
     @Test
     public void testProjectPlugin() throws IOException {
-        final String pluginId = "com.github.martixjohn.cn-repository-project-plugin";
+        final String pluginId = pluginGroup + ".cn-repository-project-plugin";
 
         String settingsScript = "";
         String buildScript = """
@@ -25,7 +28,7 @@ public class PluginTest {
                     id("%s") version "%s"
                 }
                 cnRepository {
-                    repository = com.github.martixjohn.cnrepository.ext.CnRepository.TENCENT
+                    repository = %s.ext.CnRepository.TENCENT
                 }
                 afterEvaluate {
                     println("cnRepository.repository=${cnRepository.repository.get().url}")
@@ -42,34 +45,28 @@ public class PluginTest {
         assertTrue(output.contains("dep:" + CnRepository.TENCENT.getUrl()));
     }
 
-    private static void printOutput(String output) {
-        System.out.println("===Gradle Output===\n" + output + "\n========================");
-    }
-
     @Test
     public void testSettingsPlugin() throws IOException {
-        final String pluginId = "com.github.martixjohn.cn-repository-plugin";
+        final String pluginId = pluginGroup + ".cn-repository-plugin";
 
         String settingsScript = """
                 plugins {
                     id("%s") version "%s"
                 }
-                
                 cnRepository {
-                    repository = com.github.martixjohn.cnrepository.ext.CnRepository.TENCENT
+                    repository = %s.ext.CnRepository.TENCENT
                 }
-                
-                gradle.settingsEvaluated {
+                gradle.settingsEvaluated{
                 
                     println("cnRepository.repository=${cnRepository.repository.get().url}")
                     this.dependencyResolutionManagement.repositories.forEach {
-                        if (it is MavenArtifactRepository) {
+                        if (it is MavenArtifactRepository){
                             println("dep" + ":" + it.url)
                         }
                     }
                 
                     this.pluginManagement.repositories.forEach {
-                        if (it is MavenArtifactRepository) {
+                        if (it is MavenArtifactRepository){
                             println("plugin" + ":" + it.url)
                         }
                     }
@@ -84,9 +81,14 @@ public class PluginTest {
 
     }
 
+    private static void printOutput(String output) {
+        System.out.println("===Gradle Output===\n" + output + "\n========================");
+    }
+
+
     private String executeGradle(String pluginId, String settingsScript, String buildScript) throws IOException {
-        settingsScript = settingsScript.formatted(pluginId, pluginVersion);
-        buildScript = buildScript.formatted(pluginId, pluginVersion);
+        settingsScript = settingsScript.formatted(pluginId, pluginVersion, packageName);
+        buildScript = buildScript.formatted(pluginId, pluginVersion, packageName);
         String testPath = "build/tmp/settings-test-project";
 
         Path testProjectDir = Paths.get(testPath);

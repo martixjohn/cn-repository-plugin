@@ -1,4 +1,4 @@
-package com.github.martixjohn.cnrepository.ext;
+package io.github.martixjohn.cnrepository.ext;
 
 import org.gradle.api.provider.Property;
 

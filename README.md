@@ -5,18 +5,18 @@
 
 包含两个插件:
 
-- Settings级别(scope)插件: com.github.martixjohn.cn-repository-plugin
-- Project级别(scope)插件: com.github.martixjohn.cn-repository-project-plugin
+- Settings级别(scope)插件: io.github.martixjohn.cn-repository-plugin
+- Project级别(scope)插件: io.github.martixjohn.cn-repository-project-plugin
 
 
 ## 快速上手
 
 settings.gradle.kts
 ```kotlin
-import com.github.martixjohn.cnrepository.ext.CnRepository.*
+import ext.io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
-    id("com.github.martixjohn.cn-repository-plugin") version "1.0.0"
+    id("io.github.martixjohn.cn-repository-plugin") version "1.0.0"
 }
 
 // 配置仓库
@@ -44,10 +44,10 @@ public enum CnRepository {
 
 build.gradle.kts
 ```kotlin
-import com.github.martixjohn.cnrepository.ext.CnRepository.*
+import ext.io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
-    id("com.github.martixjohn.cn-repository-project-plugin") version "1.0.0"
+    id("io.github.martixjohn.cn-repository-project-plugin") version "1.0.0"
 }
 
 // 配置仓库
