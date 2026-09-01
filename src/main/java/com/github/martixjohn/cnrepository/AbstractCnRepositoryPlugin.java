@@ -14,13 +14,13 @@ import org.gradle.api.provider.Property;
 public abstract sealed class AbstractCnRepositoryPlugin permits CnRepositoryProjectPlugin, CnRepositorySettingsPlugin {
 
     /**
-     * for subclass to use
+     * For subclass to use
      */
     protected AbstractCnRepositoryPlugin() {
     }
 
     /**
-     * set convention for repository
+     * Set convention for repository
      *
      * @param property CnRepository
      */
@@ -29,22 +29,19 @@ public abstract sealed class AbstractCnRepositoryPlugin permits CnRepositoryProj
     }
 
     /**
-     * add repository to RepositoryHandler
+     * Add the repository to RepositoryHandler
      *
      * @param extension              CnRepositoryExtension
-     * @param dependencyRepositories dependencyRepositories
+     * @param dependencyRepositories RepositoryHandler
      */
     protected final void addToRepositories(CnRepositoryExtension extension, RepositoryHandler dependencyRepositories) {
-        Action<MavenArtifactRepository> mavenAction = new Action<>() {
-            @Override
-            public void execute(MavenArtifactRepository mavenArtifactRepository) {
-                CnRepository cnRepository = extension.getRepository().get();
-                mavenArtifactRepository.setUrl(cnRepository.getUrl());
-                mavenArtifactRepository.setAllowInsecureProtocol(!cnRepository.isSecure());
-            }
+        Action<MavenArtifactRepository> mavenAction = mavenArtifactRepository -> {
+            CnRepository cnRepository = extension.getRepository().get();
+            mavenArtifactRepository.setUrl(cnRepository.getUrl());
+            mavenArtifactRepository.setAllowInsecureProtocol(!cnRepository.isSecure());
         };
         MavenArtifactRepository repo = dependencyRepositories.maven(mavenAction);
         dependencyRepositories.remove(repo);
-        dependencyRepositories.add(0, repo);
+        dependencyRepositories.addFirst(repo);
     }
 }

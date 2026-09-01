@@ -2,7 +2,6 @@ package com.github.martixjohn.cnrepository;
 
 import com.github.martixjohn.cnrepository.ext.CnRepository;
 import com.github.martixjohn.cnrepository.ext.CnRepositorySettingsExtension;
-import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.artifacts.dsl.RepositoryHandler;
 import org.gradle.api.initialization.Settings;
@@ -15,7 +14,7 @@ import org.gradle.api.provider.Property;
  */
 public final class CnRepositorySettingsPlugin extends AbstractCnRepositoryPlugin implements Plugin<Settings> {
     /**
-     * for gradle to initiate
+     * For gradle to initiate
      */
     public CnRepositorySettingsPlugin() {
     }
@@ -29,18 +28,15 @@ public final class CnRepositorySettingsPlugin extends AbstractCnRepositoryPlugin
         extension.getApplyToPlugin().convention(true);
 
 
-        settings.getGradle().settingsEvaluated(new Action<Settings>() {
-            @Override
-            public void execute(Settings settings) {
-                CnRepositorySettingsExtension extension = settings.getExtensions().getByType(CnRepositorySettingsExtension.class);
-                @SuppressWarnings("UnstableApiUsage")
-                RepositoryHandler dependencyRepositories = settings.getDependencyResolutionManagement().getRepositories();
-                addToRepositories(extension, dependencyRepositories);
+        settings.getGradle().settingsEvaluated(settings1 -> {
+            CnRepositorySettingsExtension extension1 = settings1.getExtensions().getByType(CnRepositorySettingsExtension.class);
+            @SuppressWarnings("UnstableApiUsage")
+            RepositoryHandler dependencyRepositories = settings1.getDependencyResolutionManagement().getRepositories();
+            addToRepositories(extension1, dependencyRepositories);
 
-                if (extension.getApplyToPlugin().getOrElse(false)) {
-                    RepositoryHandler pluginRepositories = settings.getPluginManagement().getRepositories();
-                    addToRepositories(extension, pluginRepositories);
-                }
+            if (extension1.getApplyToPlugin().getOrElse(false)) {
+                RepositoryHandler pluginRepositories = settings1.getPluginManagement().getRepositories();
+                addToRepositories(extension1, pluginRepositories);
             }
         });
 

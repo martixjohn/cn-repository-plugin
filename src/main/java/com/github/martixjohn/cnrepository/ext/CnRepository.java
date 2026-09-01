@@ -25,7 +25,7 @@ public enum CnRepository {
     }
 
     /**
-     * get url for repository
+     * Returns the url for repository
      *
      * @return url
      */
@@ -35,7 +35,7 @@ public enum CnRepository {
 
 
     /**
-     * does the repository supports https
+     * Does the repository supports https
      *
      * @return true if supports https
      */
