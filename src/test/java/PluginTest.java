@@ -25,7 +25,7 @@ public class PluginTest {
                     id("%s") version "%s"
                 }
                 cnRepository {
-                    repository = com.github.martixjohn.cnrepository.ext.CnRepository.TENCENT_CLOUD
+                    repository = com.github.martixjohn.cnrepository.ext.CnRepository.TENCENT
                 }
                 afterEvaluate {
                     println("cnRepository.repository=${cnRepository.repository.get().url}")
@@ -56,7 +56,7 @@ public class PluginTest {
                 }
                 
                 cnRepository {
-                    repository = com.github.martixjohn.cnrepository.ext.CnRepository.TENCENT_CLOUD
+                    repository = com.github.martixjohn.cnrepository.ext.CnRepository.TENCENT
                 }
                 
                 gradle.settingsEvaluated {
