@@ -39,7 +39,7 @@ gradlePlugin {
             displayName = "A plugin to add China repositories (Settings Scope)"
             description =
                 "Add China repositories in Settings scope, modifying the dependencyResolutionManagement and the pluginManagement DSL"
-            tags = listOf("settings-plugin", "china-plugin", "repository")
+            tags = listOf("settings-plugin", "dependencies", "repository", "china")
         }
 
         create("project-plugin") {
@@ -47,7 +47,7 @@ gradlePlugin {
             implementationClass = "io.github.martixjohn.cnrepository.CnRepositoryProjectPlugin"
             displayName = "A plugin to add China repositories (Project Scope)"
             description = "Add China repositories in Project scope, modifying the repositories DSL"
-            tags = listOf("project-plugin", "china-plugin", "repository")
+            tags = listOf("project-plugin", "dependencies", "repository", "china")
         }
     }
 }
