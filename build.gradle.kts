@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.github.martixjohn"
+group = "io.github.martixjohn"
 version = "1.0.0"
 description = "Add China repositories to your gradle project"
 
@@ -12,6 +12,8 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
     }
+    withSourcesJar()
+    withJavadocJar()
 }
 
 
@@ -29,14 +31,14 @@ gradlePlugin {
     plugins {
         create("settings-plugin") {
             id = "${project.group}.cn-repository-plugin"
-            implementationClass = "com.github.martixjohn.cnrepository.CnRepositorySettingsPlugin"
+            implementationClass = "io.github.martixjohn.cnrepository.CnRepositorySettingsPlugin"
             displayName = "CN repository plugin at Settings scope"
             description = project.description
         }
 
         create("project-plugin") {
             id = "${project.group}.cn-repository-project-plugin"
-            implementationClass = "com.github.martixjohn.cnrepository.CnRepositoryProjectPlugin"
+            implementationClass = "io.github.martixjohn.cnrepository.CnRepositoryProjectPlugin"
             displayName = "CN Repository Plugin at Project scope"
             description = project.description
         }
