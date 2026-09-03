@@ -41,7 +41,7 @@ settings.gradle.kts
 import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
-    id("io.github.martixjohn.cn-repository-plugin") version "0.1.0"
+    id("io.github.martixjohn.cn-repository-plugin") version "0.2.0"
 }
 
 // 配置仓库
@@ -62,7 +62,7 @@ build.gradle.kts
 import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
-    id("io.github.martixjohn.cn-repository-project-plugin") version "0.1.0"
+    id("io.github.martixjohn.cn-repository-project-plugin") version "0.2.0"
 }
 
 // 配置仓库

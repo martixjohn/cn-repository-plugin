@@ -42,7 +42,7 @@ This plugin modifies the `repositories` block inside your build script.
 import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
-    id("io.github.martixjohn.cn-repository-plugin") version "0.1.0"
+    id("io.github.martixjohn.cn-repository-plugin") version "0.2.0"
 }
 
 cnRepository {
@@ -60,7 +60,7 @@ cnRepository {
 import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
-    id("io.github.martixjohn.cn-repository-project-plugin") version "0.1.0"
+    id("io.github.martixjohn.cn-repository-project-plugin") version "0.2.0"
 }
 
 cnRepository {
