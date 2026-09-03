@@ -4,7 +4,7 @@ Gradle China‑Mirror Repository Plugin
 
 [English](./README.en.md)
 
-为你的Gradle项目自动添加国内仓库
+为你的Gradle项目自动添加国内仓库（但不会替换中央仓库）
 
 目前支持以下仓库源(repository)
 
@@ -38,7 +38,7 @@ Gradle China‑Mirror Repository Plugin
 
 settings.gradle.kts
 ```kotlin
-import io.github.martixjohn.cnrepository.ext.CnRepository.*
+import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
     id("io.github.martixjohn.cn-repository-plugin") version "0.1.0"
@@ -46,10 +46,10 @@ plugins {
 
 // 配置仓库
 cnRepository {
-    // 应用于插件仓库和依赖仓库
-    repository = ALIYUN // 默认
-    // 可选，不应用于插件仓库
-    applyPlugin = true // 默认
+    // 应用于依赖仓库, 使用NONE表示不应用
+    onDependencies = TENCENT
+    // 应用于插件仓库, 使用NONE表示不应用
+    onPlugins = ALIYUN
 }
 ```
 
@@ -59,7 +59,7 @@ cnRepository {
 
 build.gradle.kts
 ```kotlin
-import io.github.martixjohn.cnrepository.ext.CnRepository.*
+import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
     id("io.github.martixjohn.cn-repository-project-plugin") version "0.1.0"
@@ -67,7 +67,13 @@ plugins {
 
 // 配置仓库
 cnRepository {
-    // 应用于插件仓库和依赖仓库
-    repository = ALIYUN // 默认
+    // 应用于依赖仓库, 使用NONE表示不应用
+    onDependencies = ALIYUN // 默认
 }
 ```
+
+
+# 其他说明
+
+1. 并不会替换mavenCentral
+2. 在配置被评估后，为最终配置的仓库前添加指定仓库

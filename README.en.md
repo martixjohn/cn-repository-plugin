@@ -39,17 +39,16 @@ This plugin modifies the `repositories` block inside your build script.
 `settings.gradle.kts`
 
 ```
-import io.github.martixjohn.cnrepository.ext.CnRepository.*
+import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
     id("io.github.martixjohn.cn-repository-plugin") version "0.1.0"
 }
 
 cnRepository {
-    // Applies mirror to both plugin and dependency repositories
-    repository = ALIYUN // Default value
-    // Optional: toggle mirror for plugin repositories
-    applyPlugin = true // Default value
+    /// Applies mirror to both dependency and plugin repositories
+    onDependencies = ALIYUN
+    onPlugins = TENCENT
 }
 ```
 
@@ -58,13 +57,13 @@ cnRepository {
 `build.gradle.kts`
 
 ```
-import io.github.martixjohn.cnrepository.ext.CnRepository.*
+import io.github.martixjohn.cnrepository.CnRepository.*
 
 plugins {
     id("io.github.martixjohn.cn-repository-project-plugin") version "0.1.0"
 }
 
 cnRepository {
-    repository = ALIYUN // Default value
+    onDependencies = ALIYUN
 }
 ```
