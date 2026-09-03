@@ -1,6 +1,6 @@
-package io.github.martixjohn.cnrepository;
+package io.github.martixjohn.cnrepository.plugins;
 
-import io.github.martixjohn.cnrepository.ext.CnRepository;
+import io.github.martixjohn.cnrepository.CnRepository;
 import io.github.martixjohn.cnrepository.ext.CnRepositorySettingsExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.artifacts.dsl.RepositoryHandler;
@@ -23,21 +23,18 @@ public final class CnRepositorySettingsPlugin extends AbstractCnRepositoryPlugin
     public void apply(Settings settings) {
         ExtensionContainer extensions = settings.getExtensions();
         CnRepositorySettingsExtension extension = extensions.create("cnRepository", CnRepositorySettingsExtension.class);
-        Property<CnRepository> repositoryUrl = extension.getRepository();
-        conventionUrl(repositoryUrl);
-        extension.getApplyToPlugin().convention(true);
-
+        Property<CnRepository> depRepo = extension.getOnDependencies();
+        conventionUrl(depRepo);
+        Property<CnRepository> pluginRepo = extension.getOnPlugins();
+        conventionUrl(pluginRepo);
 
         settings.getGradle().settingsEvaluated(settings1 -> {
             CnRepositorySettingsExtension extension1 = settings1.getExtensions().getByType(CnRepositorySettingsExtension.class);
             @SuppressWarnings("UnstableApiUsage")
             RepositoryHandler dependencyRepositories = settings1.getDependencyResolutionManagement().getRepositories();
-            addToRepositories(extension1, dependencyRepositories);
-
-            if (extension1.getApplyToPlugin().getOrElse(false)) {
-                RepositoryHandler pluginRepositories = settings1.getPluginManagement().getRepositories();
-                addToRepositories(extension1, pluginRepositories);
-            }
+            addToRepositories(extension1.getOnDependencies().get(), dependencyRepositories);
+            RepositoryHandler pluginRepositories = settings1.getPluginManagement().getRepositories();
+            addToRepositories(extension1.getOnPlugins().get(), pluginRepositories);
         });
 
     }

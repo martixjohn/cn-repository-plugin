@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.martixjohn"
-version = "0.1.0"
+version = "0.2.0"
 description = "Add China repositories to your gradle project"
 
 
@@ -35,7 +35,7 @@ gradlePlugin {
     plugins {
         create("settings-plugin") {
             id = "${project.group}.cn-repository-plugin"
-            implementationClass = "io.github.martixjohn.cnrepository.CnRepositorySettingsPlugin"
+            implementationClass = "io.github.martixjohn.cnrepository.plugins.CnRepositorySettingsPlugin"
             displayName = "A plugin to add China repositories (Settings Scope)"
             description =
                 "Add China repositories in Settings scope, modifying the dependencyResolutionManagement and the pluginManagement DSL"
@@ -44,7 +44,7 @@ gradlePlugin {
 
         create("project-plugin") {
             id = "${project.group}.cn-repository-project-plugin"
-            implementationClass = "io.github.martixjohn.cnrepository.CnRepositoryProjectPlugin"
+            implementationClass = "io.github.martixjohn.cnrepository.plugins.CnRepositoryProjectPlugin"
             displayName = "A plugin to add China repositories (Project Scope)"
             description = "Add China repositories in Project scope, modifying the repositories DSL"
             tags = listOf("project-plugin", "dependencies", "repository", "mirrors", "cn")

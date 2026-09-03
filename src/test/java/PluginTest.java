@@ -1,4 +1,4 @@
-import io.github.martixjohn.cnrepository.ext.CnRepository;
+import io.github.martixjohn.cnrepository.CnRepository;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.Test;
@@ -28,10 +28,9 @@ public class PluginTest {
                     id("%s") version "%s"
                 }
                 cnRepository {
-                    repository = %s.ext.CnRepository.TENCENT
+                    onDependencies = %s.CnRepository.TENCENT
                 }
                 afterEvaluate {
-                    println("cnRepository.repository=${cnRepository.repository.get().url}")
                     this.repositories.forEach {
                         if (it is MavenArtifactRepository) {
                             println("dep" + ":" + it.url)
@@ -51,23 +50,23 @@ public class PluginTest {
 
         String settingsScript = """
                 plugins {
-                    id("%s") version "%s"
+                    id("%1$s") version "%2$s"
                 }
                 cnRepository {
-                    repository = %s.ext.CnRepository.TENCENT
+                    onDependencies = %3$s.CnRepository.TENCENT
+                    onPlugins = %3$s.CnRepository.NONE
                 }
                 gradle.settingsEvaluated{
                 
-                    println("cnRepository.repository=${cnRepository.repository.get().url}")
                     this.dependencyResolutionManagement.repositories.forEach {
                         if (it is MavenArtifactRepository){
-                            println("dep" + ":" + it.url)
+                            println("+dep" + ":" + it.url)
                         }
                     }
                 
                     this.pluginManagement.repositories.forEach {
                         if (it is MavenArtifactRepository){
-                            println("plugin" + ":" + it.url)
+                            println("+plugin" + ":" + it.url)
                         }
                     }
                 }
@@ -76,8 +75,8 @@ public class PluginTest {
         String output = executeGradle(pluginId, settingsScript, buildScript);
 
         printOutput(output);
-        assertTrue(output.contains("dep:" + CnRepository.TENCENT.getUrl()));
-        assertTrue(output.contains("plugin:" + CnRepository.TENCENT.getUrl()));
+        assertTrue(output.contains("+dep:" + CnRepository.TENCENT.getUrl()));
+        assertTrue(!output.contains("+plugin:"));
 
     }
 

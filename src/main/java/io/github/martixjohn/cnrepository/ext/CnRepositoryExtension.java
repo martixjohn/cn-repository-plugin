@@ -1,5 +1,6 @@
 package io.github.martixjohn.cnrepository.ext;
 
+import io.github.martixjohn.cnrepository.CnRepository;
 import org.gradle.api.provider.Property;
 
 
@@ -7,11 +8,12 @@ import org.gradle.api.provider.Property;
  * A Gradle extension for the Project plugin
  */
 public interface CnRepositoryExtension {
-
     /**
-     * China Repository to use
+     * 应用于依赖的仓库
+     * <p>
+     * Repository applied to plugin (pluginManagement)
      *
-     * @return the repository to use
+     * @return CnRepository
      */
-    Property<CnRepository> getRepository();
+    Property<CnRepository> getOnDependencies();
 }

@@ -1,6 +1,6 @@
-package io.github.martixjohn.cnrepository;
+package io.github.martixjohn.cnrepository.plugins;
 
-import io.github.martixjohn.cnrepository.ext.CnRepository;
+import io.github.martixjohn.cnrepository.CnRepository;
 import io.github.martixjohn.cnrepository.ext.CnRepositoryExtension;
 import org.gradle.api.Action;
 import org.gradle.api.artifacts.dsl.RepositoryHandler;
@@ -31,12 +31,14 @@ public abstract sealed class AbstractCnRepositoryPlugin permits CnRepositoryProj
     /**
      * Add the repository to RepositoryHandler
      *
-     * @param extension              CnRepositoryExtension
+     * @param cnRepository           CnRepository
      * @param dependencyRepositories RepositoryHandler
      */
-    protected final void addToRepositories(CnRepositoryExtension extension, RepositoryHandler dependencyRepositories) {
+    protected final void addToRepositories(CnRepository cnRepository, RepositoryHandler dependencyRepositories) {
+        if (CnRepository.NONE.equals(cnRepository)) {
+            return;
+        }
         Action<MavenArtifactRepository> mavenAction = mavenArtifactRepository -> {
-            CnRepository cnRepository = extension.getRepository().get();
             mavenArtifactRepository.setUrl(cnRepository.getUrl());
             mavenArtifactRepository.setAllowInsecureProtocol(!cnRepository.isSecure());
         };

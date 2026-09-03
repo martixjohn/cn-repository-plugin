@@ -1,5 +1,6 @@
 package io.github.martixjohn.cnrepository.ext;
 
+import io.github.martixjohn.cnrepository.CnRepository;
 import org.gradle.api.provider.Property;
 
 /**
@@ -8,9 +9,11 @@ import org.gradle.api.provider.Property;
 public interface CnRepositorySettingsExtension extends CnRepositoryExtension {
 
     /**
-     * Is the repository applied to plugin repository (pluginManagement)
+     * 应用于插件的仓库
+     * <p>
+     * Repository applied to plugins (pluginManagement)
      *
-     * @return is it applied to plugins management
+     * @return CnRepository
      */
-    Property<Boolean> getApplyToPlugin();
+    Property<CnRepository> getOnPlugins();
 }

@@ -1,6 +1,6 @@
-package io.github.martixjohn.cnrepository;
+package io.github.martixjohn.cnrepository.plugins;
 
-import io.github.martixjohn.cnrepository.ext.CnRepository;
+import io.github.martixjohn.cnrepository.CnRepository;
 import io.github.martixjohn.cnrepository.ext.CnRepositoryExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -16,19 +16,19 @@ public final class CnRepositoryProjectPlugin extends AbstractCnRepositoryPlugin 
     /**
      * For gradle to initiate
      */
-    public CnRepositoryProjectPlugin() {}
+    public CnRepositoryProjectPlugin() {
+    }
 
     @Override
     public void apply(Project project) {
         ExtensionContainer extensions = project.getExtensions();
         CnRepositoryExtension extension = extensions.create("cnRepository", CnRepositoryExtension.class);
-        Property<CnRepository> repositoryUrl = extension.getRepository();
+        Property<CnRepository> repositoryUrl = extension.getOnDependencies();
         conventionUrl(repositoryUrl);
 
         project.afterEvaluate(project1 -> {
             CnRepositoryExtension extension1 = project1.getExtensions().getByType(CnRepositoryExtension.class);
-            RepositoryHandler dependencyRepositories = project1.getRepositories();
-            addToRepositories(extension1, dependencyRepositories);
+            addToRepositories(extension1.getOnDependencies().get(), project1.getRepositories());
         });
 
     }
